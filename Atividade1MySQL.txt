@@ -1,0 +1,65 @@
+create database atividade1;
+
+use atividade1;
+
+create table categoria(
+	cod_categoria int auto_increment primary key,
+	desc_categoria varchar(50)
+)default charset utf8;
+
+desc categoria;
+
+create table gravadora(
+	cod_gravadora int auto_increment primary key,
+	nome_gravadora varchar(50),
+	pais varchar(50)
+)default charset utf8;
+
+desc gravadora;
+
+create table cantor(
+	cod_cantor int primary key auto_increment,
+	nome_cantor varchar(50),
+	pais varchar(30)
+)default charset utf8;
+
+desc cantor;
+
+create table pessoa(
+	cod_pessoa int primary key auto_increment,
+	nome_pessoa varchar(70)
+)charset utf8;
+
+describe pessoa;
+
+create table musica(
+	cod_musica int auto_increment primary key,
+	cod_categoria int,
+	duracao int,
+	titulo varchar(100),
+	foreign key (cod_categoria) references categoria(cod_categoria)
+)charset utf8;
+
+desc musica;
+
+create table fone(
+	cod_fone int auto_increment primary key,
+	cod_pessoa int,
+	tipo int,
+	foreign key (cod_pessoa) references pessoa(cod_pessoa)
+)charset utf8;
+
+desc fone;
+
+create table gravacao(
+	cod_gravacao int auto_increment primary key,
+	cod_gravadora int,
+	foreign key (cod_gravadora) references gravadora(cod_gravadora),
+	cod_cantor int,
+	foreign key(cod_cantor) references cantor(cod_cantor),
+	cod_musica int,
+	foreign key(cod_musica) references musica(cod_musica),
+	data_gravacao date
+) charset utf8;
+
+desc gravacao;
